@@ -44,7 +44,8 @@
         <activity android:name=".PendingPostsActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCkunoHxdytkx3fSLgffalBbppSbn2KsEE" />
+            android:value="AIzaSyCkunoHxdytkx3fSLgffalBbppSbn2KsEE"/>
+        <!--            cái này thay bằng api key của bản thân-->
     </application>
 
 </manifest>
