@@ -5,4 +5,4 @@
     android:padding="12dp"
     android:textSize="18sp"
     android:textStyle="bold"
-    android:textColor="#388E3C" />
+    android:background="@color/colorAccent" />

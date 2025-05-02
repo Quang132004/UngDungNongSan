@@ -59,7 +59,7 @@
         android:layout_height="32dp"
         android:layout_alignParentEnd="true"
         android:layout_margin="8dp"
-        android:src="@android:drawable/ic_menu_myplaces"
+        android:src="@drawable/ic_account"
         android:contentDescription="User Icon" />
 
 

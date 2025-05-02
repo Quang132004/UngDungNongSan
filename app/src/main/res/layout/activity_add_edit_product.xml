@@ -8,7 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#8BC34A"
+            android:text="Quay về trang chủ" />
 
         <ImageView
             android:id="@+id/ivPreview"

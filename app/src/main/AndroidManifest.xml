@@ -31,8 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".CategoryProductsActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".EditProfileActivity1" />
         <activity android:name=".AddEditProductActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".RegisterActivity" />

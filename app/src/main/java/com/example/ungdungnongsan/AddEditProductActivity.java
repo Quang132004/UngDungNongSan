@@ -38,7 +38,7 @@ public class AddEditProductActivity extends AppCompatActivity {
 
 	private EditText etName, etPrice, etDescription, etOrigin, etIngredients, etQuantity;
 	private AutoCompleteTextView etCategory;
-	private Button btnSave, btnChooseImage;
+	private Button btnSave, btnChooseImage, btnBack;
 	private ImageView ivPreview;
 	private Uri selectedImageUri;
 	private Product product;
@@ -64,7 +64,12 @@ public class AddEditProductActivity extends AppCompatActivity {
 		btnSave = findViewById(R.id.btnSave);
 		btnChooseImage = findViewById(R.id.btnChooseImage);
 		ivPreview = findViewById(R.id.ivPreview);
-
+		Button btnBack = findViewById(R.id.btnBack);
+		btnBack.setOnClickListener(v -> {
+			Intent intent = new Intent(AddEditProductActivity.this, MainActivity.class);
+			startActivity(intent);
+			finish();
+		});
 		// Cấu hình Cloudinary
 		Map<String, String> config = new HashMap<>();
 		config.put("cloud_name", "dcdynegor");
@@ -120,6 +125,8 @@ public class AddEditProductActivity extends AppCompatActivity {
 				android.R.layout.simple_dropdown_item_1line, categoryList);
 		etCategory.setAdapter(adapter);
 		etCategory.setThreshold(1);
+
+		etCategory.setOnClickListener(v -> etCategory.showDropDown());
 	}
 
 	private void loadProductIfEditing() {

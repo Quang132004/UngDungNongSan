@@ -109,7 +109,7 @@
         android:layout_marginTop="24dp"
         android:text="Đăng nhập"
         android:textSize="16sp"
-        app:backgroundTint="#4CAF50"
+        app:backgroundTint="#8BC34A"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng ký"
-            android:textColor="@color/accent"
+            android:textColor="@color/colorAccent"
             android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

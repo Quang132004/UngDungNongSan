@@ -84,11 +84,21 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartI
                         String description = productSnapshot.child("description").getValue(String.class);
                         String origin = productSnapshot.child("origin").getValue(String.class);
                         String ingredients = productSnapshot.child("ingredients").getValue(String.class);
+                        // Retrieve quantity from database
+                        Integer quantity = productSnapshot.child("quantity").getValue(Integer.class);
 
                         if (name != null && imageUrl != null && price != null) {
                             Product product = new Product(name, imageUrl, price, description, origin, ingredients);
                             product.setKey(productSnapshot.getKey());
                             product.setCategory(category);
+
+                            // Set the quantity (default to 1 if null)
+                            if (quantity != null) {
+                                product.setQuantity(quantity);
+                            } else {
+                                product.setQuantity(1); // Default to 1 instead of 0 to make it available
+                            }
+
                             relatedProducts.add(product);
                         }
                     }

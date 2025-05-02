@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             // Nút Chỉnh sửa
 			builder.setNegativeButton("Chỉnh sửa", (dialog, which) -> {
-				startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
+				startActivity(new Intent(MainActivity.this, EditProfileActivity1.class));
 			});
 
             // Nút Đăng xuất
@@ -457,6 +457,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 			}
 		});
 	}
+
 
 	private void filterProductsByName(String keyword) {
 		if (keyword.isEmpty()) {

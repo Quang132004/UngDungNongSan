@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/organic_badge">
+    android:background="@color/colorAccent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -17,13 +17,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#8BC34A"
+            android:background="@color/colorAccent"
             app:navigationIcon="@drawable/ic_arrow_back">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#8BC34A">
+                android:background="@color/colorAccent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="@color/price_color"/>
+                            android:textColor="@color/colorAccent"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -205,16 +205,16 @@
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
 
+                    <!-- Ingredients Section -->
                     <TextView
                         android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textSize="14sp"
+                        android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/text_secondary"
-                        android:lineSpacingMultiplier="1.2"/>
+                        android:textSize="14sp" />
 
-                    <!-- Ingredients Section -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -336,49 +336,6 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Certificate Verification Section -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Nguồn gốc sản phẩm"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
-                                android:textColor="@color/text_primary"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xác minh chứng nhận và nguồn gốc của sản phẩm"
-                                android:textSize="14sp"
-                                android:layout_marginTop="4dp"
-                                android:textColor="@color/text_secondary"/>
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnVerifyOrigin"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xem chứng nhận"
-                                android:layout_marginTop="8dp"
-                                android:textAllCaps="false"
-                                app:icon="@drawable/ic_verify"
-                                app:iconGravity="textStart"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
                     <!-- Similar Products Section -->
                     <TextView
                         android:layout_width="match_parent"
@@ -431,10 +388,11 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_minus" />
 
-                <TextView
-                    android:id="@+id/tvQuantity"
+                <EditText
+                    android:id="@+id/edQuantity"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:text="1"
                     android:textSize="16sp"
                     android:gravity="center"
@@ -453,7 +411,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
-                android:backgroundTint="@color/primary"
+                android:backgroundTint="@color/colorAccent"
                 android:text="Thêm vào giỏ hàng"
                 android:textAllCaps="false"
                 app:cornerRadius="8dp"
