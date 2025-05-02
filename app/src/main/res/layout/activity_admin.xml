@@ -5,26 +5,65 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddProduct"
-        style="@style/AppButton.Primary"
+    <!-- Toolbar có tiêu đề và 2 nút chức năng (ImageButton) -->
+
+    <!-- Danh sách sản phẩm -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/adminToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Thêm sản phẩm mới"
-        android:drawableStart="@drawable/ic_add"
-        android:drawablePadding="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/price_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Quản lý sản phẩm"
+        app:titleTextColor="@android:color/white">
+
+        <ImageButton
+            android:id="@+id/btnManageAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Quản lý tài khoản"
+            android:src="@drawable/ic_manage_account"
+            app:tint="@android:color/white" />
+
+
+        <!-- Nút Thêm sản phẩm -->
+        <ImageButton
+            android:id="@+id/btnAddProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Thêm sản phẩm mới"
+            android:src="@drawable/ic_add"
+            app:tint="@android:color/white" />
+
+        <ImageButton
+            android:id="@+id/btnManageProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Thêm sản phẩm mới"
+            android:src="@drawable/ic_add"
+            app:tint="@android:color/white" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAdminProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="8dp"
+        android:padding="12dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/btnAddProduct"
+        app:layout_constraintTop_toBottomOf="@id/adminToolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

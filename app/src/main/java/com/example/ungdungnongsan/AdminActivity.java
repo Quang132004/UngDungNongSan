@@ -40,8 +40,18 @@ public class AdminActivity extends AppCompatActivity {
 
 		loadProducts();
 
+		findViewById(R.id.btnManageAccount).setOnClickListener(v -> {
+			Intent intent = new Intent(this, UserListActivity.class);
+			startActivity(intent);
+		});
+
 		findViewById(R.id.btnAddProduct).setOnClickListener(v -> {
 			Intent intent = new Intent(this, AddEditProductActivity.class);
+			startActivityForResult(intent, 1);
+		});
+
+		findViewById(R.id.btnManageProduct).setOnClickListener(v -> {
+			Intent intent = new Intent(this, UserListActivity.class);
 			startActivityForResult(intent, 1);
 		});
 
@@ -67,7 +77,11 @@ public class AdminActivity extends AppCompatActivity {
 						if (product != null) {
 							product.setKey(productSnapshot.getKey());
 							product.setCategory(categoryName);
-							productList.add(product);
+
+							// Chỉ add sản phẩm chưa duyệt
+							if (!product.isApproved()) {
+								productList.add(product);
+							}
 						}
 					}
 				}

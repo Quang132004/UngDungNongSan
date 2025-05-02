@@ -65,6 +65,18 @@
                     android:text="Xóa"
                     app:icon="@drawable/ic_delete"
                     app:iconGravity="textStart" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnApprove"
+                    style="@style/AppButton.Primary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:text="Duyệt"
+                    app:backgroundTint="@color/accent1"
+                    app:icon="@drawable/ic_edit"
+                    app:iconGravity="textStart" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

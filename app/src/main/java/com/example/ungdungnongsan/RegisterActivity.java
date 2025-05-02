@@ -20,7 +20,6 @@ public class RegisterActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 
-
 		edtName = findViewById(R.id.edtName);
 		edtEmail = findViewById(R.id.edtEmail);
 		edtPassword = findViewById(R.id.edtPassword);
@@ -29,9 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 		btnRegister = findViewById(R.id.btnRegister);
 		tvLoginPrompt = findViewById(R.id.tvLoginPrompt);
 
-
 		mAuth = FirebaseAuth.getInstance();
-
 
 		btnRegister.setOnClickListener(v -> {
 			String name = edtName.getText().toString().trim();
@@ -40,28 +37,28 @@ public class RegisterActivity extends AppCompatActivity {
 			String phone = edtPhone.getText().toString().trim();
 			String address = edtAddress.getText().toString().trim();
 
-
 			if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
 				Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
-
 			mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
 				if (task.isSuccessful()) {
-					String uid = mAuth.getCurrentUser().getUid();
+					String uid = mAuth.getCurrentUser().getUid(); // Lấy userId từ Firebase
 
+					// Tạo đối tượng User và truyền userId
+					Users newUser = new Users(uid, email, password, name, phone, address);
 
-					Users newUser = new Users(email, password, name, phone, address);
-
-
+					// Lưu thông tin người dùng vào Firebase Realtime Database
 					DatabaseReference ref = FirebaseDatabase.getInstance("https://quanlynongsan-d0391-default-rtdb.asia-southeast1.firebasedatabase.app")
-							                        .getReference("users")
-							                        .child(uid);
+							.getReference("users")
+							.child(uid); // Sử dụng uid làm key của người dùng
+
 					ref.setValue(newUser).addOnCompleteListener(refTask -> {
 						if (refTask.isSuccessful()) {
 							Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
 
+							// Chuyển hướng đến màn hình đăng nhập
 							startActivity(new Intent(this, LoginActivity.class));
 							finish();
 						} else {
@@ -74,9 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
 			});
 		});
 
-
 		tvLoginPrompt.setOnClickListener(v -> {
-
 			Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
 			startActivity(intent);
 			finish();

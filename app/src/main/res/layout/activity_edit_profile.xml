@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#8BC34A">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +38,7 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#8BC34A"
             android:text="Lưu thay đổi" />
     </LinearLayout>
 </ScrollView>

@@ -1,7 +1,8 @@
 package com.example.ungdungnongsan;
+
 import java.io.Serializable;
 
-public class Product implements Serializable  {
+public class Product implements Serializable {
 	private String id;
 	private String name;
 	private String imageUrl;
@@ -11,27 +12,16 @@ public class Product implements Serializable  {
 	private String ingredients;
 	private String key;
 	private String category;
-	private String idSeller;
+	private String userId; // Dùng userId thay cho idSeller
 	private int quantity;
-	public Product() {}
+	private boolean isApproved;
 
-	public String getId() {
-		return id;
+	public Product() {
+		this.isApproved = false;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getIdSeller() {
-		return idSeller;
-	}
-
-	public void setIdSeller(String idSeller) {
-		this.idSeller = idSeller;
-	}
-
-	public Product(String id, String name, String imageUrl, String price, String description, String origin, String ingredients, String key, String category, String idSeller, int quantity) {
+	public Product(String id, String name, String imageUrl, String price, String description, String origin,
+				   String ingredients, String key, String category, String userId, int quantity) {
 		this.id = id;
 		this.name = name;
 		this.imageUrl = imageUrl;
@@ -41,8 +31,9 @@ public class Product implements Serializable  {
 		this.ingredients = ingredients;
 		this.key = key;
 		this.category = category;
-		this.idSeller = idSeller;
+		this.userId = userId;
 		this.quantity = quantity;
+		this.isApproved = false;
 	}
 
 	public Product(String name, String imageUrl, String price, String description, String origin, String ingredients) {
@@ -52,67 +43,43 @@ public class Product implements Serializable  {
 		this.description = description;
 		this.origin = origin;
 		this.ingredients = ingredients;
-	}
-	public String getKey() {
-		return key;
+		this.isApproved = false;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
+	// Getter và Setter
+	public String getId() { return id; }
+	public void setId(String id) { this.id = id; }
 
-	public String getCategory() {
-		return category;
-	}
+	public String getUserId() { return userId; }
+	public void setUserId(String userId) { this.userId = userId; }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public String getDescription() {
-		return description;
-	}
+	public String getKey() { return key; }
+	public void setKey(String key) { this.key = key; }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	public String getCategory() { return category; }
+	public void setCategory(String category) { this.category = category; }
 
-	public String getOrigin() {
-		return origin;
-	}
+	public String getDescription() { return description; }
+	public void setDescription(String description) { this.description = description; }
 
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
+	public String getOrigin() { return origin; }
+	public void setOrigin(String origin) { this.origin = origin; }
 
-	public String getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(String ingredients) {
-		this.ingredients = ingredients;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
+	public String getIngredients() { return ingredients; }
+	public void setIngredients(String ingredients) { this.ingredients = ingredients; }
 
 	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+
 	public String getImageUrl() { return imageUrl; }
+	public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
 	public String getPrice() { return price; }
+	public void setPrice(String price) { this.price = price; }
 
-	public int getQuantity() {
-		return quantity;
-	}
+	public int getQuantity() { return quantity; }
+	public void setQuantity(int quantity) { this.quantity = quantity; }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	public boolean isApproved() { return isApproved; }
+	public void setApproved(boolean approved) { isApproved = approved; }
 }

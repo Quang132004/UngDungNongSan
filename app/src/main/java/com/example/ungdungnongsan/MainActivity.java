@@ -1,11 +1,13 @@
 package com.example.ungdungnongsan;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,6 +94,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 			startActivity(intent);
 		});
 
+		ImageView ivListPost = findViewById(R.id.ivListPost);
+		ivListPost.setOnClickListener(v -> {
+			Intent intent = new Intent(this, PendingPostsActivity.class);
+			startActivity(intent);
+		});
+
+        ImageView ivAddProduct = findViewById(R.id.ivAddProduct);
+		ivAddProduct.setOnClickListener(v -> {
+			Intent intent = new Intent(this, AddEditProductActivity.class);
+			startActivity(intent);
+		});
+
 		etSearch = findViewById(R.id.etSearch);
 		ImageView ivUserIcon = findViewById(R.id.ivUserIcon);
 		ivUserIcon.setOnClickListener(v -> {
@@ -109,10 +123,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 			AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 			builder.setTitle("Thông tin người dùng");
 			builder.setMessage(message);
+
+            // Nút OK
 			builder.setPositiveButton("OK", null);
+
+            // Nút Chỉnh sửa
 			builder.setNegativeButton("Chỉnh sửa", (dialog, which) -> {
 				startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
 			});
+
+            // Nút Đăng xuất
 			builder.setNeutralButton("Đăng xuất", (dialog, which) -> {
 				SharedPreferences.Editor editor = prefs.edit();
 				editor.clear();
@@ -123,7 +143,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 				startActivity(intent);
 				finish();
 			});
-			builder.show();
+
+			// Hiển thị AlertDialog
+			AlertDialog dialog = builder.show();
+
+			// Lấy các nút trong AlertDialog và thay đổi màu chữ
+			Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+			Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+			Button neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+
+            // Thay đổi màu chữ cho các nút
+			positiveButton.setTextColor(Color.BLACK);
+			negativeButton.setTextColor(Color.BLACK);
+			neutralButton.setTextColor(Color.BLACK);
 		});
 
 		etSearch.addTextChangedListener(new TextWatcher() {
@@ -365,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 	private void fetchDataFromFirebase() {
 		DatabaseReference rootRef = FirebaseDatabase.getInstance("https://quanlynongsan-d0391-default-rtdb.asia-southeast1.firebasedatabase.app")
-				                            .getReference("products");
+				.getReference("products");
 		Log.d("MainActivity", "Bắt đầu tải dữ liệu từ Firebase");
 
 		rootRef.addValueEventListener(new ValueEventListener() {
@@ -380,28 +412,40 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 					Log.d("MainActivity", "Đang xử lý nhóm: " + groupName);
 
 					for (DataSnapshot idSnapshot : groupSnapshot.getChildren()) {
-						String imageUrl = idSnapshot.child("imageUrl").getValue(String.class);
-						String name = idSnapshot.child("name").getValue(String.class);
-						String price = idSnapshot.child("price").getValue(String.class);
-						String description = idSnapshot.child("description").getValue(String.class);
-						String origin = idSnapshot.child("origin").getValue(String.class);
-						String ingredients = idSnapshot.child("ingredients").getValue(String.class);
-						int quantity = idSnapshot.child("quantity").getValue(Integer.class) != null
-								               ? idSnapshot.child("quantity").getValue(Integer.class)
-								               : 0;
-						if (name != null && imageUrl != null && price != null ) {
-							Product product = new Product(name, imageUrl, price, description, origin, ingredients);
-							product.setKey(idSnapshot.getKey());
-							product.setQuantity(quantity);
-							product.setCategory(groupName);
-							productList.add(product);
-							Log.d("MainActivity", "Đã thêm sản phẩm: " + name);
+						Boolean isApproved = idSnapshot.child("approved").getValue(Boolean.class);
+
+						// Chỉ thêm sản phẩm nếu isApproved == true
+						if (Boolean.TRUE.equals(isApproved)) {
+							String imageUrl = idSnapshot.child("imageUrl").getValue(String.class);
+							String name = idSnapshot.child("name").getValue(String.class);
+							String price = idSnapshot.child("price").getValue(String.class);
+							String description = idSnapshot.child("description").getValue(String.class);
+							String origin = idSnapshot.child("origin").getValue(String.class);
+							String ingredients = idSnapshot.child("ingredients").getValue(String.class);
+							int quantity = idSnapshot.child("quantity").getValue(Integer.class) != null
+									? idSnapshot.child("quantity").getValue(Integer.class)
+									: 0;
+
+							if (name != null && imageUrl != null && price != null) {
+								Product product = new Product(name, imageUrl, price, description, origin, ingredients);
+								product.setKey(idSnapshot.getKey());
+								product.setQuantity(quantity);
+								product.setCategory(groupName);
+								productList.add(product);
+								Log.d("MainActivity", "Đã thêm sản phẩm: " + name);
+							} else {
+								Log.e("MainActivity", "Thiếu thông tin sản phẩm cho " + idSnapshot.getKey());
+							}
 						} else {
-							Log.e("MainActivity", "Thiếu thông tin sản phẩm cho " + idSnapshot.getKey());
+							Log.d("MainActivity", "Bỏ qua sản phẩm chưa được duyệt: " + idSnapshot.getKey());
 						}
 					}
-					groupProductList.add(new GroupProduct(groupName, productList));
+
+					if (!productList.isEmpty()) {
+						groupProductList.add(new GroupProduct(groupName, productList));
+					}
 				}
+
 				groupProductAdapter.setData(groupProductList);
 				Log.d("MainActivity", "Cập nhật adapter với " + groupProductList.size() + " nhóm");
 			}

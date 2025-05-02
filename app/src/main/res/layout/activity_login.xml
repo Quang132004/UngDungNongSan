@@ -12,7 +12,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="48dp"
-        android:src="@drawable/app_logo"
+        android:src="@drawable/ic_launcher_foreground"
         android:contentDescription="Logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +109,7 @@
         android:layout_marginTop="24dp"
         android:text="Đăng nhập"
         android:textSize="16sp"
+        app:backgroundTint="#4CAF50"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -163,7 +164,11 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/circle_button_background"
             android:contentDescription="Google"
-            android:src="@drawable/ic_google" />
+            app:srcCompat="@drawable/ic_google"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:padding="12dp" />
+
 
         <ImageButton
             android:id="@+id/btnFacebook"

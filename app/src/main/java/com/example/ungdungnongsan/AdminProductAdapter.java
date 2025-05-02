@@ -41,13 +41,11 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 		holder.tvName.setText(product.getName());
 		holder.tvPrice.setText("Giá: " + product.getPrice());
 
-
 		Glide.with(context)
 				.load(product.getImageUrl())
 				.placeholder(R.drawable.ic_launcher_background)
 				.error(R.drawable.ic_launcher_foreground)
 				.into(holder.imgProduct);
-
 
 		holder.itemView.setOnClickListener(v -> {
 			Intent intent = new Intent(context, ProductDetailActivity.class);
@@ -63,9 +61,9 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 
 		holder.btnDelete.setOnClickListener(v -> {
 			DatabaseReference ref = FirebaseDatabase.getInstance("https://quanlynongsan-d0391-default-rtdb.asia-southeast1.firebasedatabase.app")
-					                        .getReference("products")
-					                        .child(product.getCategory())
-					                        .child(product.getKey());
+					.getReference("products")
+					.child(product.getCategory())
+					.child(product.getKey());
 
 			ref.removeValue().addOnSuccessListener(unused -> {
 				Toast.makeText(context, "Đã xóa sản phẩm", Toast.LENGTH_SHORT).show();
@@ -74,6 +72,23 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 				notifyItemRangeChanged(position, productList.size());
 			}).addOnFailureListener(e -> {
 				Toast.makeText(context, "Xóa thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+			});
+		});
+
+		holder.btnApprove.setOnClickListener(v -> {
+			DatabaseReference ref = FirebaseDatabase.getInstance("https://quanlynongsan-d0391-default-rtdb.asia-southeast1.firebasedatabase.app")
+					.getReference("products")
+					.child(product.getCategory())
+					.child(product.getKey());
+
+			// Cập nhật trường approved thành true
+			ref.child("approved").setValue(true).addOnSuccessListener(unused -> {
+				Toast.makeText(context, "Duyệt sản phẩm thành công", Toast.LENGTH_SHORT).show();
+				productList.remove(position);
+				notifyItemRemoved(position);
+				notifyItemRangeChanged(position, productList.size());
+			}).addOnFailureListener(e -> {
+				Toast.makeText(context, "Duyệt thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 			});
 		});
 	}
@@ -86,7 +101,7 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 		TextView tvName, tvPrice;
 		ImageView imgProduct;
-		Button btnEdit, btnDelete;
+		Button btnEdit, btnDelete, btnApprove;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
@@ -95,6 +110,7 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 			imgProduct = itemView.findViewById(R.id.imgProduct);
 			btnEdit = itemView.findViewById(R.id.btnEdit);
 			btnDelete = itemView.findViewById(R.id.btnDelete);
+			btnApprove = itemView.findViewById(R.id.btnApprove); // Thêm nút Duyệt
 		}
 	}
 }

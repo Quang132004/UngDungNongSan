@@ -236,7 +236,7 @@ public class SellerProductsActivity extends AppCompatActivity {
 					for (DataSnapshot productSnapshot : categorySnapshot.getChildren()) {
 						Product product = productSnapshot.getValue(Product.class);
 						String productId = productSnapshot.getKey(); // Lấy ID của sản phẩm từ key
-						if (product != null && sellerId.equals(product.getIdSeller())) {
+						if (product != null && sellerId.equals(product.getUserId())) {
 							// Gán ID cho đối tượng Product
 							product.setId(productId);
 							productList.add(product);
