@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/ivListPost"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="35dp"
         android:layout_toStartOf="@id/ivAddProduct"
         android:layout_margin="8dp"
         android:src="@drawable/ic_list_product"
@@ -45,8 +45,8 @@
 
     <ImageView
         android:id="@+id/ivCart"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="45dp"
+        android:layout_height="35dp"
         android:layout_toStartOf="@id/ivUserIcon"
         android:layout_margin="8dp"
         android:src="@drawable/ic_launcher_cart"
@@ -55,7 +55,7 @@
 
     <ImageView
         android:id="@+id/ivUserIcon"
-        android:layout_width="32dp"
+        android:layout_width="30dp"
         android:layout_height="32dp"
         android:layout_alignParentEnd="true"
         android:layout_margin="8dp"

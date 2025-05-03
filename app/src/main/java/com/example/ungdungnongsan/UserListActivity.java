@@ -45,11 +45,23 @@ public class UserListActivity extends AppCompatActivity {
 
             @Override
             public void onDelete(int position) {
-                String emailKey = userList.get(position).getEmail().replace(".", "_");
-                usersRef.child(emailKey).removeValue();
-                userList.remove(position);
-                adapter.notifyItemRemoved(position);
-                Toast.makeText(UserListActivity.this, "Đã xoá tài khoản", Toast.LENGTH_SHORT).show();
+                Users user = userList.get(position);
+                String userId = user.getUserId();
+
+                if (userId == null || userId.isEmpty()) {
+                    Toast.makeText(UserListActivity.this, "Xóa người dùng lỗi", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                usersRef.child(userId).removeValue()
+                        .addOnSuccessListener(unused -> {
+                            userList.remove(position);
+                            adapter.notifyItemRemoved(position);
+                            Toast.makeText(UserListActivity.this, "Đã xoá tài khoản", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(UserListActivity.this, "Xóa thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
             }
         });
 

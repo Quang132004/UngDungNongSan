@@ -38,7 +38,7 @@ public class AdminActivity extends AppCompatActivity {
 		productsRef = FirebaseDatabase.getInstance("https://quanlynongsan-d0391-default-rtdb.asia-southeast1.firebasedatabase.app")
 				              .getReference("products");
 
-		loadProducts();
+//		loadProducts();
 
 		findViewById(R.id.btnManageAccount).setOnClickListener(v -> {
 			Intent intent = new Intent(this, UserListActivity.class);
@@ -51,18 +51,26 @@ public class AdminActivity extends AppCompatActivity {
 		});
 
 		findViewById(R.id.btnManageProduct).setOnClickListener(v -> {
-			Intent intent = new Intent(this, UserListActivity.class);
+			Intent intent = new Intent(this, AdminManageProductsActivity.class);
 			startActivityForResult(intent, 1);
 		});
 
 	}
+
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if (requestCode == 1 && resultCode == RESULT_OK) {
+//			loadProducts();
+//		}
+//	}
+
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == 1 && resultCode == RESULT_OK) {
-			loadProducts();
-		}
+	protected void onResume() {
+		super.onResume();
+		loadProducts(); // Gọi lại loadProducts() để làm mới dữ liệu mỗi khi quay lại
 	}
+
 
 	private void loadProducts() {
 		productList.clear();

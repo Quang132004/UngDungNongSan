@@ -258,6 +258,7 @@ public class AddEditProductActivity extends AppCompatActivity {
 				newProd.setCategory(category);
 				newProd.setUserId(sellerId);
 				newProd.setQuantity(quantity);
+				newProd.setApproved(false);  // Set approved to false (chờ duyệt)
 				ref.child(category).child(key).setValue(newProd);
 			} else {
 
@@ -268,9 +269,9 @@ public class AddEditProductActivity extends AppCompatActivity {
 				product.setOrigin(origin);
 				product.setIngredients(ingredients);
 				product.setQuantity(quantity);
+				product.setApproved(false);  // Set approved to false (chờ duyệt)
 				ref.child(category).child(product.getKey()).setValue(product);
 			}
-
 			Toast.makeText(this, "Lưu thành công", Toast.LENGTH_SHORT).show();
 			setResult(RESULT_OK);
 			finish();

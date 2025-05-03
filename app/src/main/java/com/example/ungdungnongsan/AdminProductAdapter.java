@@ -1,5 +1,6 @@
 package com.example.ungdungnongsan;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -41,6 +42,23 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 		holder.tvName.setText(product.getName());
 		holder.tvPrice.setText("Giá: " + product.getPrice());
 
+		holder.tvUserId.setText("Người đăng: Đang tải...");
+
+		DatabaseReference userRef = FirebaseDatabase.getInstance("https://quanlynongsan-d0391-default-rtdb.asia-southeast1.firebasedatabase.app")
+				.getReference("users")
+				.child(product.getUserId());
+
+		userRef.child("email").get().addOnSuccessListener(dataSnapshot -> {
+			if (dataSnapshot.exists()) {
+				String email = dataSnapshot.getValue(String.class);
+				holder.tvUserId.setText("Người đăng: " + email);
+			} else {
+				holder.tvUserId.setText("Người đăng: Không rõ");
+			}
+		}).addOnFailureListener(e -> {
+			holder.tvUserId.setText("Người đăng: Lỗi");
+		});
+
 		Glide.with(context)
 				.load(product.getImageUrl())
 				.placeholder(R.drawable.ic_launcher_background)
@@ -56,7 +74,7 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 		holder.btnEdit.setOnClickListener(v -> {
 			Intent intent = new Intent(context, AddEditProductActivity.class);
 			intent.putExtra("product", product);
-			context.startActivity(intent);
+			((Activity) context).startActivityForResult(intent, 100);
 		});
 
 		holder.btnDelete.setOnClickListener(v -> {
@@ -99,7 +117,7 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 	}
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
-		TextView tvName, tvPrice;
+		TextView tvName, tvPrice, tvUserId;
 		ImageView imgProduct;
 		Button btnEdit, btnDelete, btnApprove;
 
@@ -107,6 +125,7 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 			super(itemView);
 			tvName = itemView.findViewById(R.id.tvName);
 			tvPrice = itemView.findViewById(R.id.tvPrice);
+			tvUserId = itemView.findViewById(R.id.tvUserId);
 			imgProduct = itemView.findViewById(R.id.imgProduct);
 			btnEdit = itemView.findViewById(R.id.btnEdit);
 			btnDelete = itemView.findViewById(R.id.btnDelete);

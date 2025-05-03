@@ -42,6 +42,8 @@
         <activity android:name=".CheckoutActivity" />
         <activity android:name=".UserListActivity" />
         <activity android:name=".PendingPostsActivity" />
+        <activity android:name=".AdminManageProductsActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCkunoHxdytkx3fSLgffalBbppSbn2KsEE"/>

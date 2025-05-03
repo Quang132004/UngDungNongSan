@@ -61,6 +61,10 @@ public class CategoryProductsActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 productList.clear();
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+
+                    Boolean isApproved = productSnapshot.child("approved").getValue(Boolean.class);
+                    if (isApproved == null || !isApproved) continue;
+
                     String imageUrl = productSnapshot.child("imageUrl").getValue(String.class);
                     String name = productSnapshot.child("name").getValue(String.class);
                     String price = productSnapshot.child("price").getValue(String.class);

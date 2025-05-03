@@ -38,6 +38,14 @@
                 android:layout_marginTop="4dp"
                 android:text="Giá" />
 
+            <TextView
+                android:id="@+id/tvUserId"
+                style="@style/ProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Người đăng:" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

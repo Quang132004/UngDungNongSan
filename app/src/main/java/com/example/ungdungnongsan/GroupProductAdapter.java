@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GroupProductAdapter extends RecyclerView.Adapter<GroupProductAdapter.GroupViewHolder> {
@@ -38,6 +39,14 @@ public class GroupProductAdapter extends RecyclerView.Adapter<GroupProductAdapte
 	public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
 		GroupProduct group = groupList.get(position);
 		holder.tvGroupName.setText(group.getGroupName());
+
+		// Lọc sản phẩm đã duyệt
+		List<Product> approvedProducts = new ArrayList<>();
+		for (Product p : group.getProducts()) {
+			if (p.isApproved()) {
+				approvedProducts.add(p);
+			}
+		}
 
 		// Initially show only a limited number of products (e.g., first 4)
 		List<Product> displayedProducts = group.getProducts();
